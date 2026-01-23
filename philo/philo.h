@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/22 18:24:44 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/23 13:51:51 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ typedef struct	s_philo {
 	t_table	*right;
 }	t_philo;
 
-int main(int argc, char **argv);
+// int main(int argc, char **argv);
+int main(void);
 unsigned long	gtd(void);
+void	*testfunc(void *arg);
 
 unsigned long	decimal(const char *str, unsigned long res, int i);
 unsigned long	ft_atol(const char *str);

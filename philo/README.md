@@ -17,12 +17,29 @@ Checklist
 
 - Time loop
 	- [X] Timer
+	- [ ] ft_usleep for more precise timing (compare with < ms)
 
 - Routine
 	- [ ] while loop with threads and ms
+	- [ ]
 
-- Philosophers
-	- [ ] Struct
+- Struct
+	- [ ] mutex protected threads (e.g meal, fork, sleep)
+	- [ ] mutex protected printf
+	- [ ] philo eaten enough?
+
+- Wrapper
+	- [ ] ft_sleep
+	- [ ] grab fork/put down fork
+	- [ ] check status of death and whether eaten enough
+
+
+
+-> make it so that odd numbered philos grab the right then the left fork,
+	and the even numbered philos grab the left then the right one
+
+
+
 
 
 Allowed Functions:
@@ -59,4 +76,15 @@ Allowed Functions:
 		philosophers have eaten at least number_of_times_each_philosopher_must_eat
 		times, the simulation stops. If not specified, the simulation stops when a
 		philosopher dies.
+
+
+
+
+
+## Recources
+
+[gettimeofday manual](https://pubs.opengroup.org/onlinepubs/9699919799/functions/gettimeofday.html)
+[Multithreading Explanation](https://www.geeksforgeeks.org/c/multithreading-in-c/)
+[Mutex Explanation](https://www.geeksforgeeks.org/linux-unix/mutex-lock-for-linux-thread-synchronization/)
+[Philosophers guide](https://42-cursus.gitbook.io/guide/3-rank-03/philosophers/understand-philosophers)
 
