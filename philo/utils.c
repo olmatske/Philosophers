@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 18:23:27 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/22 18:24:30 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:25:04 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,34 @@ unsigned long	ft_atol(const char *str)
 	if (str[i] == '.')
 		res = decimal(str, res, ++i);
 	return (res *= sign, res);
+}
+
+
+
+
+
+pthread_t tid[2];
+int counter;
+pthread_mutex_t lock;
+
+void* trythis(void* arg) 
+{
+	pthread_mutex_lock(&lock);
+	counter += 1;
+	printf("Job %d started\n", counter);
+	for (unsigned long i = 0; i < 0xFFFFFFFF; i++);
+	printf("Job %d finished\n", counter);
+	pthread_mutex_unlock(&lock);
+	return NULL;
+}
+
+int main()
+{
+	pthread_mutex_init(&lock, NULL);
+	for (int i = 0; i < 2; i++)
+		pthread_create(&tid[i], NULL, trythis, NULL);
+	pthread_join(tid[0], NULL);
+	pthread_join(tid[1], NULL);
+	pthread_mutex_destroy(&lock);
+	return 0;
 }

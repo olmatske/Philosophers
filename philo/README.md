@@ -2,10 +2,13 @@
 
 Checklist
 
-- [ ] Understand threads
+- [X] Understand threads
 - [ ] Understand mutex
 
-- [ ] Validation
+
+
+
+- Validation
 	- [ ] Error definition in header
 	- [ ] Parsing
 	- [ ] Arguments:
@@ -15,23 +18,33 @@ Checklist
 		- time to sleep
 		- number of times each philosopher must eat
 
-- Time loop
-	- [X] Timer
-	- [ ] ft_usleep for more precise timing (compare with < ms)
 
-- Routine
+- Functions 
+	Use Wrapper !!!
+	- [X] Timer
 	- [ ] while loop with threads and ms
-	- [ ]
+	- [ ] ft_usleep for more precise timing (compare with < ms)
+	- [ ] ft_sleep
+	- [ ] grab fork/put down fork
+	- [ ] check status of death and whether eaten enough
+
+
+- Header file
+	- [ ] Error Messages
+	- [ ] actions
+
+
+- Files
+	- [ ] cleanup
+	- [ ] 
+
 
 - Struct
 	- [ ] mutex protected threads (e.g meal, fork, sleep)
 	- [ ] mutex protected printf
 	- [ ] philo eaten enough?
-
-- Wrapper
-	- [ ] ft_sleep
-	- [ ] grab fork/put down fork
-	- [ ] check status of death and whether eaten enough
+	- [ ] exit in pthread to substitute pthread_cancel
+	- [ ] cleanup file
 
 
 
@@ -87,4 +100,13 @@ Allowed Functions:
 [Multithreading Explanation](https://www.geeksforgeeks.org/c/multithreading-in-c/)
 [Mutex Explanation](https://www.geeksforgeeks.org/linux-unix/mutex-lock-for-linux-thread-synchronization/)
 [Philosophers guide](https://42-cursus.gitbook.io/guide/3-rank-03/philosophers/understand-philosophers)
+
+
+
+
+
+
+
+
+
 

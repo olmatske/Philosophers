@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/23 14:02:57 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:38:48 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	*testfunc(void *arg)
 	{
 		timer = gtd() - start;
 		printf("%li\n", timer);
-		sleep(1);
-		// usleep(8 * 1000);
+		// sleep(1);
+		usleep(100 * 1000);
 	}
 	return NULL;
 }
@@ -31,15 +31,16 @@ void	*testfunc(void *arg)
 void	*functest(void *arg)
 {
 	(void)arg;
+	int	i = 0;
 	unsigned long	start;
 	unsigned long	timer;
 	start = gtd();
 	while (1)
 	{
 		timer = gtd() - start;
-		printf("Second Thread\n");
-		sleep(1);
-		// usleep(8 * 1000);
+		printf("%d Thread\n", i++);
+		// sleep(1);
+		usleep(100 * 1000);
 	}
 	return NULL;
 }
@@ -49,9 +50,11 @@ int main (void)
 {
 	pthread_t	thread_1;
 	pthread_t	thread_2;
+	// pthread_mutex_t	lock;
+
 	pthread_create(&thread_1, NULL, testfunc, NULL);
 	pthread_create(&thread_2, NULL, functest, NULL);
-	sleep(6);
+	sleep(1);
 	pthread_cancel(thread_1);
 	pthread_cancel(thread_2);
 	pthread_join(thread_1, NULL);
@@ -117,8 +120,8 @@ unsigned long	gtd(void)
 	unsigned long	time;
 
 	gettimeofday(&tv, NULL);
-	// time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-	time = tv.tv_sec;
+	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	// time = tv.tv_sec;
 	return (time);
 }
 
