@@ -6,7 +6,7 @@
 #    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/22 13:58:23 by olmatske          #+#    #+#              #
-#    Updated: 2026/01/22 15:45:28 by olmatske         ###   ########.fr        #
+#    Updated: 2026/01/23 12:47:41 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ clean:
 	$(RM) $(OBJECTS)
 
 fclean:
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(OBJECTS)
 
 re:
 	$(MAKE) fclean

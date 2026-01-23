@@ -5,21 +5,43 @@ Checklist
 - [ ] Understand threads
 - [ ] Understand mutex
 
-- [ ] Parsing
 - [ ] Validation
+	- [ ] Error definition in header
+	- [ ] Parsing
 	- [ ] Arguments:
 		- Number of philosophers
 		- time to die
 		- time to eat
 		- time to sleep
 		- number of times each philosopher must eat
-- [ ] Error handling
-- [ ] Errors in header
-- [ ] Struct
-- [ ] while loop with threads and ms
-- [ ] Eat, Sleep, Think, Repeat
-- [X] Timer
-- [ ] Routine loop
+
+- Time loop
+	- [X] Timer
+
+- Routine
+	- [ ] while loop with threads and ms
+
+- Philosophers
+	- [ ] Struct
+
+
+Allowed Functions:
+
+- memset
+- printf
+- malloc
+- free
+- write
+- usleep
+- gettimeofday
+- pthread_create
+- pthread_detach
+- pthread_join
+- pthread_mutex_init
+- pthread_mutex_destroy
+- pthread_mutex_lock
+- pthread_mutex_unlock
+
 
 	◦ number_of_philosophers: The number of philosophers and also the number
 		of forks.
@@ -38,19 +60,3 @@ Checklist
 		times, the simulation stops. If not specified, the simulation stops when a
 		philosopher dies.
 
-Allowed Functions:
-
-- memset
-- printf
-- malloc
-- free
-- write
-- usleep
-- gettimeofday
-- pthread_create
-- pthread_detach
-- pthread_join
-- pthread_mutex_init
-- pthread_mutex_destroy
-- pthread_mutex_lock
-- pthread_mutex_unlock

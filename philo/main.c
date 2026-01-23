@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/22 18:36:01 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/23 12:53:50 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@ int	main(int argc, char **argv)
 	else
 	{
 		start = gtd();
-		usleep(4 * 1000);
-		timer = gtd() - start;
-		printf("%li\n", timer);
+		// usleep(8 * 1000);
+		while (1)
+		{
+			timer = gtd() - start;
+			printf("%li\n", timer);
+			sleep(1);
+		}
+		// timer = gtd() - start;
+		// printf("%li\n", timer);
 		return (0);
 	}
-
 }
 
 unsigned long	gtd(void)
@@ -41,7 +46,8 @@ unsigned long	gtd(void)
 	unsigned long	time;
 
 	gettimeofday(&tv, NULL);
-	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	// time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	time = tv.tv_sec;
 	return (time);
 }
 
