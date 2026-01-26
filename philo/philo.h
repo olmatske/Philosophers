@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/23 15:30:29 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/26 17:41:09 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/time.h>
+#include <limits.h>
 
 //# ERROR MESSAGES #############################################################
 
@@ -35,29 +36,49 @@
 
 struct timeval tv;
 
-typedef struct	s_table {
-	int	forks;
-} t_table;
-
 typedef struct	s_philo {
-	int	id;
-	int	meals;
-	unsigned long	time_slept;
-	unsigned long	time_thought;
-	unsigned long	time_ate;
-	t_table	*left;
-	t_table	*right;
+	pthread_t			thread;
+	struct s_table		*table;
+	pthread_mutex_t		*lfork;      // left fork of current philo
+	pthread_mutex_t		*rfork;      // right fork of current philo
+	unsigned int		index;       // philo index
+	int					meal_count;  // how many meals to eat until the program finishes
+	unsigned long		lem;         // last eaten meal to check for death
 }	t_philo;
+
+typedef struct	s_table {
+	t_philo				*philos;     // list of philos
+	pthread_mutex_t		*forks;      // list of forks
+	pthread_mutex_t		death;
+	pthread_mutex_t		print;
+	unsigned long		ttd;         // time to die
+	unsigned long		tte;         // time to eat
+	unsigned long		tts;         // time to sleep
+	int					nom;         // number of meals eaten
+	int					nof;         // number of forks
+}	t_table;
 
 //# FUNCTIONS ##################################################################
 
-// int main(int argc, char **argv);
-int main(void);
+// main.c //////////////////////////////////////////////////////////////////////
+int				main(int argc, char **argv);
 unsigned long	gtd(void);
-void	*testfunc(void *arg);
 
-unsigned long	decimal(const char *str, unsigned long res, int i);
+// testing.c ///////////////////////////////////////////////////////////////////
+int				test(void);
+void			*testfunc(void *arg);
+void			*functest(void *arg);
+
+// utils.c /////////////////////////////////////////////////////////////////////
 unsigned long	ft_atol(const char *str);
+
+// validate.c //////////////////////////////////////////////////////////////////
+int	input_check(char **tokens);
+
+
+
+
+
 
 
 #endif

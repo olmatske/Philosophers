@@ -3,10 +3,7 @@
 Checklist
 
 - [X] Understand threads
-- [ ] Understand mutex
-
-
-
+- [X] Understand mutex
 
 - Validation
 	- [ ] Error definition in header
@@ -36,24 +33,20 @@ Checklist
 
 - Files
 	- [ ] cleanup
-	- [ ] 
+	- [ ] validation
+	- [ ] init
 
 
 - Struct
-	- [ ] mutex protected threads (e.g meal, fork, sleep)
-	- [ ] mutex protected printf
-	- [ ] philo eaten enough?
+	- [X] mutex protected threads (e.g meal, fork, sleep)
+	- [X] mutex protected printf
+	- [X] philo eaten enough?
 	- [ ] exit in pthread to substitute pthread_cancel
-	- [ ] cleanup file
 
 
 
 -> make it so that odd numbered philos grab the right then the left fork,
 	and the even numbered philos grab the left then the right one
-
-
-
-
 
 Allowed Functions:
 
