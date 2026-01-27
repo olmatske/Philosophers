@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/26 17:42:09 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:46:44 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	main(int argc, char **argv)
 {
+	if (argc != 5 && argc != 6)
+		return (printf("%s\n", INVALID), 1);
 	if (input_check(argv) != 0)
 		return (INVALID, 1);
 	printf("good boy\n");
@@ -22,6 +24,7 @@ int	main(int argc, char **argv)
 
 unsigned long	gtd(void)
 {
+	struct timeval tv;
 	unsigned long	time;
 
 	gettimeofday(&tv, NULL);

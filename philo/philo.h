@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/26 17:41:09 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:48:33 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 //# ERROR MESSAGES #############################################################
 
 # define INVALID	"Du Hurensohn"
+# define INPUT		"Wrong input. Please try again."
+# define ERROR		"Problem with "
+# define GOOD		"Works"
 
 //# STATE CHANGES ##############################################################
 
@@ -31,10 +34,10 @@
 # define EAT		" is eating"
 # define THINK		" is thinking"
 # define SLEEP		" is sleeping"
+# define DEATH		" died"
+# define FULL		"Everyone is full"
 
 //# STRUCTS ####################################################################
-
-struct timeval tv;
 
 typedef struct	s_philo {
 	pthread_t			thread;
@@ -74,6 +77,7 @@ unsigned long	ft_atol(const char *str);
 
 // validate.c //////////////////////////////////////////////////////////////////
 int	input_check(char **tokens);
+int	valid_num(int a);
 
 
 
