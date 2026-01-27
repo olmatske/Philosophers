@@ -5,9 +5,10 @@ Checklist
 - [X] Understand threads
 - [X] Understand mutex
 
+
 - Validation
-	- [ ] Error definition in header
-	- [ ] Parsing
+	- [X] Error definition in header
+	- [X] Parsing
 	- [ ] Arguments:
 		- Number of philosophers
 		- time to die

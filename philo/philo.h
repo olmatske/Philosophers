@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/27 14:48:33 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:12:31 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define INVALID	"Du Hurensohn"
 # define INPUT		"Wrong input. Please try again."
-# define ERROR		"Problem with "
+# define ERROR		"Problem with blah blah blah"
 # define GOOD		"Works"
 
 //# STATE CHANGES ##############################################################
@@ -77,7 +77,7 @@ unsigned long	ft_atol(const char *str);
 
 // validate.c //////////////////////////////////////////////////////////////////
 int	input_check(char **tokens);
-int	valid_num(int a);
+int	ft_isdigit(int a);
 
 
 

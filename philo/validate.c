@@ -6,27 +6,11 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 16:40:23 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/27 14:50:47 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:24:15 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// int	ft_validate(int argc, char **argv)
-// {
-// 	int	i;
-
-// 	i = 0;
-
-// 	while (argv[i] != NULL)
-// 	{
-// 		if (valid_num == 0)
-// 			return (printf("%s\n", INVALID), 1);
-// 		else
-			
-// 	}
-// 	return (0);
-// }
 
 int	input_check(char **tokens)
 {
@@ -34,34 +18,29 @@ int	input_check(char **tokens)
 	int		k;
 	long	n;
 
-	k = 0;
+	k = 1;
 	while (tokens[k])
 	{
 		i = 0;
-		if (tokens[k][i] == '-' || tokens[k][i] == '+')    // NO SIGNS
+		if (tokens[k][i] == '-')
+			return (printf("%s\n", INPUT), 1);
+		if (tokens[k][i] == '+')
 			i++;
-		if (!tokens[k][i])
-			return (1);
 		while (tokens[k][i])
 		{
-			if (!valid_num((unsigned char)tokens[k][i]))
-				return (1);
+			if (ft_isdigit((unsigned char)tokens[k][i]) == 0)
+				return (printf("%s\n", INPUT), 1);
 			i++;
-			printf("%s\n", GOOD);
 		}
 		n = ft_atol(tokens[k]);
 		if (n > INT_MAX)
-			return (1);
+			return (printf("%s\n", INPUT), 1);
 		k++;
 	}
-	return (printf("%s\n", GOOD), 0);
+	return (0);
 }
 
-int	valid_num(int a)
+int	ft_isdigit(int a)
 {
 	return (a >= '0' && a <= '9');
 }
-
-// just copy it from push swap at this point -_-
-
-
