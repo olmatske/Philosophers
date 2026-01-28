@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/27 18:12:31 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/28 18:04:02 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ typedef struct	s_philo {
 	pthread_t			thread;
 	struct s_table		*table;
 	pthread_mutex_t		*lfork;      // left fork of current philo
-	pthread_mutex_t		*rfork;      // right fork of current philo
+	pthread_mutex_t		*rfork;      // current fork of philo
 	unsigned int		index;       // philo index
 	int					meal_count;  // how many meals to eat until the program finishes
 	unsigned long		lem;         // last eaten meal to check for death
+	struct s_philo		*next;
 }	t_philo;
 
 typedef struct	s_table {
@@ -57,7 +58,7 @@ typedef struct	s_table {
 	unsigned long		ttd;         // time to die
 	unsigned long		tte;         // time to eat
 	unsigned long		tts;         // time to sleep
-	int					nom;         // number of meals eaten
+	int					nom;         // number of meals to eat
 	int					nof;         // number of forks
 }	t_table;
 
