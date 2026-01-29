@@ -9,7 +9,7 @@ Checklist
 - Validation
 	- [X] Error definition in header
 	- [X] Parsing
-	- [ ] Arguments:
+	- [X] Arguments:
 		- Number of philosophers
 		- time to die
 		- time to eat

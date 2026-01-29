@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/28 21:59:24 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/29 13:40:25 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ typedef struct	s_philo {
 	pthread_mutex_t		*rfork;      // current fork of philo
 	unsigned int		index;       // philo index
 	int					meal_count;  // how many meals to eat until the program finishes
-	unsigned long		lem;         // last eaten meal to check for death
-	unsigned long		tse;         // time since last eaten
+	unsigned long		tse;         // time since last eaten check for death
 	unsigned long		tss;         // time to sleep
 	struct s_philo		*next;
 }	t_philo;
@@ -77,14 +76,17 @@ void			*functest(void *arg);
 
 // utils.c /////////////////////////////////////////////////////////////////////
 unsigned long	ft_atol(const char *str);
+int	ft_atoi(const char *str);
 
 // validate.c //////////////////////////////////////////////////////////////////
 int	input_check(char **tokens);
 int	ft_isdigit(int a);
 
 
-
-
+void	init_wrapper(char **argv);
+void	init_table(int philos, unsigned long die, unsigned long eat,
+		unsigned long sleep, int meals);
+void	init_philo(int philos);
 
 
 

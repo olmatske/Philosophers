@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/28 21:59:00 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/29 00:33:01 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 		return (printf("%s\n", INVALID), 1);
 	if (input_check(argv) != 0)
 		return (INVALID, 1);
-	int_wrapper(argv);
+	init_wrapper(argv);
 	printf("good boy\n");
 	// monitoring
 	return (0);

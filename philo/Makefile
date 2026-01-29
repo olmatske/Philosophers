@@ -6,13 +6,13 @@
 #    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/22 13:58:23 by olmatske          #+#    #+#              #
-#    Updated: 2026/01/27 14:42:49 by olmatske         ###   ########.fr        #
+#    Updated: 2026/01/29 00:35:42 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philosophers
 
-SOURCES = main.c validate.c utils.c
+SOURCES = main.c validate.c utils.c init.c
 OBJECTS = $(SOURCES:.c=.o)
 
 CC = cc
