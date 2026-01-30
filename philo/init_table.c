@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 18:25:35 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/29 14:07:21 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/01/30 13:49:58 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,60 +19,45 @@
 // 	pthread_create()
 // }
 
-void	init_wrapper(char **argv)
+void	init_wrapper(char **argv, t_table **table, t_philo **philo)
+{
+	int	meals;
+
+	if (!argv[5])
+		meals = -1;
+	else
+		meals = ft_atoi(argv[5]);
+
+}
+
+void	put_args(char **argv)
 {
 	int				number_of_philos;
 	unsigned long	time_to_die;
 	unsigned long	time_to_eat;
 	unsigned long	time_to_sleep;
-	int				meals;
+
 
 	number_of_philos = ft_atoi(argv[1]);
 	time_to_die = ft_atol(argv[2]);
 	time_to_eat = ft_atol(argv[3]);
 	time_to_sleep = ft_atol(argv[4]);
-	if (!argv[5])
-		meals = 0;
-	else
-		meals = ft_atoi(argv[5]);
-	init_table(time_to_die, time_to_eat, time_to_sleep, meals);
-	init_philo(number_of_philos);
 
 }
 
-void	init_table(int philos, unsigned long die, unsigned long eat,
-		unsigned long sleep, int meals)
+t_table	**init_table(t_table **table, char **argv, int meals)
 {
-	t_table	*table;
+	long	table_index;
+	long	len;
 
-	table = NULL;
-	table = malloc(sizeof(t_table));
-	table->ttd = die;
-	table->tte = eat;
-	table->tts = sleep;
-	pthread_mutex_init(&table->forks, NULL);
+	table_index = 0;
+	len = 0;
+	while (table_index < len)
+	{
+		table = add_table(table, argv, table_index);
+		table_index++;
+	}
+	return (table);
 	printf("\nnumber of philos: %d\ndie: %lu\neat: %lu\nsleep: %lu\nmeals: %d\n", philos, die, eat, sleep, meals);
 }
 
-// circly linked list
-void	init_philo(int philos, t_table table)
-{
-	t_philo	*philo;
-	unsigned long	time_since_eaten;
-	unsigned long	time_slept;
-	int				id;
-
-	philo = NULL;
-	id = 0;
-	printf("number of philos: %d\n", philos);
-	philo = malloc(sizeof((t_philo *) philos));
-	while (id < philos)
-	{
-		philo
-	}
-}
-
-// void	init_forks(int num)
-// {
-	
-// }

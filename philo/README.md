@@ -6,6 +6,9 @@ Checklist
 - [X] Understand mutex
 
 
+- arrays for forks and philo
+- bool for alive status -> if dead, 
+
 - Validation
 	- [X] Error definition in header
 	- [X] Parsing
