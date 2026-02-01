@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/01 17:00:43 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/01 20:05:00 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,21 @@ typedef struct	s_philo {
 	pthread_mutex_t		*rfork;      // current fork of philo
 	unsigned int		index;       // philo index
 	unsigned int		meal_count;  // how many meals eaten
-	unsigned long		tse;         // time since last eaten check for death
+	unsigned long		time_since_eaten;         // time since last eaten check for death
 	unsigned long		tss;         // time to sleep
-	int					is_alive;    // bool for killing
-}	t_philo;
-
-typedef struct	s_table {
-	t_philo				*philos;     // list of philos
-	pthread_mutex_t		*forks;      // list of forks
-	pthread_mutex_t		death;
-	pthread_mutex_t		print;
 	unsigned long		ttd;         // time to die
 	unsigned long		tte;         // time to eat
 	unsigned long		tts;         // time to sleep
 	int					nom;         // number of meals to eat
+	int					is_alive;    // bool for killing
+}	t_philo;
+
+typedef struct	s_table {
+	t_philo				*philos;     // array of philos
+	pthread_mutex_t		*forks;      // array of forks
+	pthread_mutex_t		death;
+	pthread_mutex_t		print;
+
 	// int					nof;         // number of forks
 }	t_table;
 
@@ -70,7 +71,6 @@ typedef struct	s_table {
 // main.c //////////////////////////////////////////////////////////////////////
 int				main(int argc, char **argv);
 unsigned long	gtd(void);
-void	free_philo(t_philo **philo);
 
 // testing.c ///////////////////////////////////////////////////////////////////
 int				test(void);
@@ -86,10 +86,8 @@ int	input_check(char **tokens);
 int	ft_isdigit(int a);
 
 
-void	init_wrapper(char **argv, t_philo *philo);
-// void	init_table(int philos, unsigned long die, unsigned long eat,
-// 		unsigned long sleep, int meals);
-t_philo	*init_philo(int number_of_philos, t_philo *philo);
+t_table	*init_table(char **argv, t_philo *philo, t_table *table, int meals);
+t_philo	*init_philo(int number_of_philos, t_philo *philo, t_table *table);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 18:25:35 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/01 17:12:52 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/01 19:56:33 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,66 +19,54 @@
 // 	pthread_create()
 // }
 
-void	init_wrapper(char **argv, t_philo *philo)
+void	init_forks(t_philo *philo, int id, int number_of_philos)
 {
-	int				meals;
-	int				number_of_philos;
-	unsigned long	time_to_die;
-	unsigned long	time_to_eat;
-	unsigned long	time_to_sleep;
-
-	number_of_philos = ft_atoi(argv[1]);
-	time_to_die = ft_atol(argv[2]);
-	time_to_eat = ft_atol(argv[3]);
-	time_to_sleep = ft_atol(argv[4]);
-	if (!argv[5])
-		meals = -1;
-	else
-		meals = ft_atoi(argv[5]);
-	// table = malloc(sizeof(t_table));
-	
-	
-	init_philo(number_of_philos, philo);
-	// init_table
-
+	if (!(number_of_philos % 2))
+	{
+		philo[id].lfork = 
+	}
 }
 
-t_philo	*init_philo(int number_of_philos, t_philo *philo)
+t_table	*init_table(char **argv, t_philo *philo, t_table *table, int meals)
 {
-	unsigned long	time_since_eaten;
-	unsigned long	time_slept;
-	int				id;
-	int				meals_eaten;
+	table = malloc(sizeof(t_table));
+	
+	table->philos = philo;
+	// table->forks = forks;
+	table->ttd = ft_atol(argv[2]);
+	table->tte = ft_atol(argv[3]);
+	table->tts = ft_atol(argv[4]);
+	table->nom = meals;
+	
+
+	// init_philo(number_of_philos, philo);
+	return (table);
+}
+
+t_philo	*init_philo(int number_of_philos, t_philo *philo, t_table *table)
+{
+	int	id;
 
 	id = 0;
-	meals_eaten = 0;
-	time_since_eaten = -1;
-	time_slept = -1;
 	philo = malloc(sizeof(t_philo) * number_of_philos);
 	memset(philo, 0, sizeof(t_philo) * number_of_philos);
 	while (id < number_of_philos)
 	{
 		philo[id].index = id;
-		philo[id].meal_count = meals_eaten;
-		philo[id].tse = time_since_eaten;
-		philo[id].tss = time_slept;
+		philo[id].meal_count = 0;
+		philo[id].tse = 0;
+		philo[id].tss = 0;
+		philo[id].is_alive = 1; 
 		printf("%d\n", philo[id].index);
 		id++;
 	}
 
-
-	printf("number of philos: %d\n", number_of_philos);
+	// printf("\n%d\n", philo[id].meal_count);
+	// printf("%lu\n", philo[id].tse);
+	// printf("%lu\n", philo[id].tss);
+	// printf("%d\n", philo[id].is_alive);
+	// printf("number of philos: %d\n", number_of_philos);
 	return(philo);
 }
 
-// t_table	**init_table(t_table **table, char **argv, int meals)
-// {
-// 	long	table_index;
-// 	long	len;
-
-// 	table_index = 0;
-// 	len = 0;
-	
-// 	// printf("\nnumber of philos: %d\ndie: %lu\neat: %lu\nsleep: %lu\nmeals: %d\n", philos, die, eat, sleep, meals);
-// }
 
