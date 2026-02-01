@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/30 15:52:19 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/01 01:58:41 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 int	main(int argc, char **argv)
 {
-	t_table			**table;
-	t_philo			**philo;
-
 	if (argc != 5 && argc != 6)
 		return (printf("%s\n", INVALID), 1);
+	t_table			*table;
+	t_philo			*philo[ft_atoi(argv[1])];
+
 	if (input_check(argv) != 0)
 		return (INVALID, 1);
+	table = NULL;
+	init_wrapper(argv, table, *philo);
 	printf("good boy\n");
 	// monitoring
 	return (0);
