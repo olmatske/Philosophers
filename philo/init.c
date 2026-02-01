@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 18:25:35 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/01 01:52:59 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/01 17:12:52 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@
 // 	pthread_create()
 // }
 
-void	init_wrapper(char **argv, t_table *table, t_philo *philo)
+void	init_wrapper(char **argv, t_philo *philo)
 {
 	int				meals;
 	int				number_of_philos;
 	unsigned long	time_to_die;
 	unsigned long	time_to_eat;
 	unsigned long	time_to_sleep;
-
 
 	number_of_philos = ft_atoi(argv[1]);
 	time_to_die = ft_atol(argv[2]);
@@ -36,15 +35,15 @@ void	init_wrapper(char **argv, t_table *table, t_philo *philo)
 		meals = -1;
 	else
 		meals = ft_atoi(argv[5]);
-	table = malloc(sizeof(t_table));
-	philo = malloc(sizeof(t_philo) * number_of_philos);
-	memset(philo, 0, number_of_philos);
+	// table = malloc(sizeof(t_table));
+	
+	
 	init_philo(number_of_philos, philo);
 	// init_table
 
 }
 
-void	init_philo(int number_of_philos, t_philo *philo)
+t_philo	*init_philo(int number_of_philos, t_philo *philo)
 {
 	unsigned long	time_since_eaten;
 	unsigned long	time_slept;
@@ -55,16 +54,21 @@ void	init_philo(int number_of_philos, t_philo *philo)
 	meals_eaten = 0;
 	time_since_eaten = -1;
 	time_slept = -1;
+	philo = malloc(sizeof(t_philo) * number_of_philos);
+	memset(philo, 0, sizeof(t_philo) * number_of_philos);
 	while (id < number_of_philos)
 	{
-		printf("%d\n", philo[id].index);
 		philo[id].index = id;
+		philo[id].meal_count = meals_eaten;
+		philo[id].tse = time_since_eaten;
+		philo[id].tss = time_slept;
+		printf("%d\n", philo[id].index);
 		id++;
 	}
 
 
 	printf("number of philos: %d\n", number_of_philos);
-
+	return(philo);
 }
 
 // t_table	**init_table(t_table **table, char **argv, int meals)

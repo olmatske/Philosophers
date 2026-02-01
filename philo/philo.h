@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/01 01:55:39 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/01 17:00:43 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 #include <pthread.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/time.h>
 #include <limits.h>
@@ -68,6 +70,7 @@ typedef struct	s_table {
 // main.c //////////////////////////////////////////////////////////////////////
 int				main(int argc, char **argv);
 unsigned long	gtd(void);
+void	free_philo(t_philo **philo);
 
 // testing.c ///////////////////////////////////////////////////////////////////
 int				test(void);
@@ -83,10 +86,10 @@ int	input_check(char **tokens);
 int	ft_isdigit(int a);
 
 
-void	init_wrapper(char **argv, t_table *table, t_philo *philo);
+void	init_wrapper(char **argv, t_philo *philo);
 // void	init_table(int philos, unsigned long die, unsigned long eat,
 // 		unsigned long sleep, int meals);
-void	init_philo(int number_of_philos, t_philo *philo);
+t_philo	*init_philo(int number_of_philos, t_philo *philo);
 
 
 

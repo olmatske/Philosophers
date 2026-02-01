@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/01 01:58:41 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/01 17:06:29 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ int	main(int argc, char **argv)
 {
 	if (argc != 5 && argc != 6)
 		return (printf("%s\n", INVALID), 1);
-	t_table			*table;
-	t_philo			*philo[ft_atoi(argv[1])];
+	// t_table			*table;
+	t_philo			*philo;
 
 	if (input_check(argv) != 0)
 		return (INVALID, 1);
-	table = NULL;
-	init_wrapper(argv, table, *philo);
+	// table = NULL;
+	philo = init_philo(ft_atoi(argv[1]), NULL);
 	printf("good boy\n");
 	// monitoring
-	return (0);
+	return (free(philo), 0);
 }
 
 unsigned long	gtd(void)
@@ -39,3 +39,18 @@ unsigned long	gtd(void)
 	return (time);
 }
 
+// void	free_philo(t_philo **philo)
+// {
+// 	t_philo	*tmp;
+// 	int		counter;
+
+// 	tmp = (*philo);
+// 	counter = 0;
+// 	while (*philo)
+// 	{
+// 		tmp = philo[counter];
+// 		free(philo[counter]);
+// 		philo[counter] = tmp;
+// 		counter++;
+// 	}
+// }
