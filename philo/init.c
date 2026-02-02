@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 18:25:35 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/01 19:56:33 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/02 14:36:35 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 // 	pthread_create()
 // }
 
-void	init_forks(t_philo *philo, int id, int number_of_philos)
-{
-	if (!(number_of_philos % 2))
-	{
-		philo[id].lfork = 
-	}
-}
+// void	init_forks(t_philo *philo, int id, int number_of_philos)
+// {
+// 	if (!(number_of_philos % 2))
+// 	{
+// 		philo[id].lfork = 
+// 	}
+// }
 
 t_table	*init_table(char **argv, t_philo *philo, t_table *table, int meals)
 {
@@ -54,9 +54,10 @@ t_philo	*init_philo(int number_of_philos, t_philo *philo, t_table *table)
 	{
 		philo[id].index = id;
 		philo[id].meal_count = 0;
-		philo[id].tse = 0;
+		philo[id].time_since_eaten = 0;
 		philo[id].tss = 0;
 		philo[id].is_alive = 1; 
+		philo[id].table = table;
 		printf("%d\n", philo[id].index);
 		id++;
 	}
