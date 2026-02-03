@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/02 14:32:50 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/03 17:29:24 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct	s_table {
 	int					nom;         // number of meals to eat
 	pthread_mutex_t		death;
 	pthread_mutex_t		print;
-
+	unsigned long		time;
 	// int					nof;         // number of forks
 }	t_table;
 
@@ -70,7 +70,7 @@ typedef struct	s_table {
 
 // main.c //////////////////////////////////////////////////////////////////////
 int				main(int argc, char **argv);
-unsigned long	gtd(void);
+unsigned long	get_time(void);
 
 // testing.c ///////////////////////////////////////////////////////////////////
 int				test(void);

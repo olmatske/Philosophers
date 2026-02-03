@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 18:25:35 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/03 17:18:34 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/03 17:30:56 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ t_table	*init_table(char **argv, t_philo *philo, t_table *table, int meals)
 	table->tts = ft_atol(argv[4]);
 	table->nom = meals;
 	table->philos = philo;
-
-	printf("\nTABLE:\nttd: %lu\n", table->ttd);
-	printf("tte: %lu\n", table->tte);
-	printf("tts: %lu\n", table->tts);
-	printf("nom: %d\n", table->nom);
+	table->time = get_time();
+	// printf("\nTABLE:\nttd: %lu\n", table->ttd);
+	// printf("tte: %lu\n", table->tte);
+	// printf("tts: %lu\n", table->tts);
+	// printf("nom: %d\n", table->nom);
 	return (table);
 }
 

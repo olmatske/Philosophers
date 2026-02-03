@@ -28,6 +28,7 @@ Checklist
 	- [ ] ft_sleep
 	- [ ] grab fork/put down fork
 	- [ ] check status of death and whether eaten enough
+	- [ ] exit in pthread function to substitute pthread_cancel
 
 
 - Header file
@@ -37,15 +38,19 @@ Checklist
 
 - Files
 	- [ ] cleanup
-	- [ ] validation
+	- [X] validation
 	- [X] init
+	- [ ] 
 
 
 - Struct
 	- [X] mutex protected threads (e.g meal, fork, sleep)
 	- [X] mutex protected printf
 	- [X] philo eaten enough?
-	- [ ] exit in pthread to substitute pthread_cancel
+
+- Routine
+	- [ ] eat, sleep, think, repeat
+	- [ ] think if no fork available
 
 
 

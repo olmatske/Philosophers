@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/02 14:35:08 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/03 17:29:24 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 	return (free(philo), 0);
 }
 
-unsigned long	gtd(void)
+unsigned long	get_time(void)
 {
 	struct timeval tv;
 	unsigned long	time;

@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 16:34:54 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/03 17:02:33 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/03 17:29:24 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	*testfunc(void *arg)
 	(void)arg;
 	unsigned long	start;
 	unsigned long	timer;
-	start = gtd();
+	start = get_time();
 	while (1)
 	{	
-		timer = gtd() - start;
+		timer = get_time() - start;
 		pthread_mutex_lock(&lock);
 		printf("%li\n", timer);
 		pthread_mutex_unlock(&lock);
@@ -38,10 +38,10 @@ void	*functest(void *arg)
 	int	i = 0;
 	unsigned long	start;
 	unsigned long	timer;
-	start = gtd();
+	start = get_time();
 	while (1)
 	{
-		timer = gtd() - start;
+		timer = get_time() - start;
 		pthread_mutex_lock(&lock);
 		printf("%d Thread\n", i++);
 		pthread_mutex_unlock(&lock);
