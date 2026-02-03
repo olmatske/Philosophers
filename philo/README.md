@@ -38,7 +38,7 @@ Checklist
 - Files
 	- [ ] cleanup
 	- [ ] validation
-	- [ ] init
+	- [X] init
 
 
 - Struct
