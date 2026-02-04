@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/03 17:29:24 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/04 20:31:38 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_philo {
 	unsigned long		tss;         // time sleept
 	unsigned long		time_since_eaten;         // time since last eaten check for death
 	int					is_alive;    // bool for killing
+	int					is_full;
 }	t_philo;
 
 typedef struct	s_table {
@@ -59,11 +60,11 @@ typedef struct	s_table {
 	unsigned long		ttd;         // time to die
 	unsigned long		tte;         // time to eat
 	unsigned long		tts;         // time to sleep
-	int					nom;         // number of meals to eat
+	int					nom;         // MUTEX + ptr???     // number of meals to eat
 	pthread_mutex_t		death;
 	pthread_mutex_t		print;
 	unsigned long		time;
-	// int					nof;         // number of forks
+	int					total_philos;         // number of forks
 }	t_table;
 
 //# FUNCTIONS ##################################################################
@@ -85,10 +86,12 @@ int	ft_atoi(const char *str);
 int	input_check(char **tokens);
 int	ft_isdigit(int a);
 
-
+// init.c //////////////////////////////////////////////////////////////////////
 t_table	*init_table(char **argv, t_philo *philo, t_table *table, int meals);
 t_philo	*init_philo(int number_of_philos, t_philo *philo, t_table *table);
 
+// routine.c ///////////////////////////////////////////////////////////////////
+void	*routine(t_philo *philo, t_table *table);
 
 
 #endif

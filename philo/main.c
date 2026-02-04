@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/03 17:29:24 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/04 20:15:35 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	philo = init_philo(ft_atoi(argv[1]), NULL, table);
 	printf("good boy\n");
 	// monitoring
-	return (free(philo), 0);
+	return (free(philo), free(table), 0);
 }
 
 unsigned long	get_time(void)
