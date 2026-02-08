@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 20:35:04 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 20:49:20 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/08 21:14:41 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ void	monitoring(t_philo *philo, t_table *table)
 		i++;
 	}
 	(void)philo;
-	while (0)
+	while (1)
 	{
 		if (table->meals_to_eat != (unsigned int)-1
 			&& check_fullness(philo, table) == 1)
 		{
+			i = 0;
+			while(i < table->total_philos)
+				philo[i++].is_alive = 0;
 			printft(table, philo, FULL);
 			break ;
 		}
@@ -44,18 +47,13 @@ void	monitoring(t_philo *philo, t_table *table)
 int	check_fullness(t_philo *philo, t_table *table)
 {
 	unsigned int	i;
-	unsigned int	full;
 
 	i = 0;
-	full = 0;
-	while (full != table->total_philos)
+	while (i < table->total_philos)
 	{
-		if (i == table->total_philos)
-			i = 0;
-		if (philo[i].meal_count == table->meals_to_eat)
-			full++;
-		else
-			i++;
+		if (philo[i].meal_count < table->meals_to_eat)
+			return (0);
+		i++;
 	}
 	return (1);
 }

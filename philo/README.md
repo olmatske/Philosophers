@@ -19,6 +19,7 @@ Checklist
 		- time to sleep
 		- number of times each philosopher must eat
 
+- [ ] remove msg of full when done
 
 - Functions 
 	Use Wrapper !!!
