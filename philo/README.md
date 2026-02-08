@@ -29,6 +29,7 @@ Checklist
 	- [ ] grab fork/put down fork
 	- [ ] check status of death and whether eaten enough
 	- [ ] exit in pthread function to substitute pthread_cancel
+	- [ ] free function for philo and table
 
 
 - Header file

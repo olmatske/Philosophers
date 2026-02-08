@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/04 20:31:38 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/08 15:10:09 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,18 @@ typedef struct	s_philo {
 	pthread_mutex_t		*rfork;      // current fork of philo
 	unsigned int		index;       // philo index
 	unsigned int		meal_count;  // how many meals eaten
-	unsigned long		tss;         // time sleept
+	unsigned long		tss;         // time slept
 	unsigned long		time_since_eaten;         // time since last eaten check for death
 	int					is_alive;    // bool for killing
-	int					is_full;
 }	t_philo;
 
 typedef struct	s_table {
-	t_philo				*philos;     // array of philos
+	t_philo				**philos;     // array of philos
 	pthread_mutex_t		*forks;      // array of fork
 	unsigned long		ttd;         // time to die
 	unsigned long		tte;         // time to eat
 	unsigned long		tts;         // time to sleep
-	int					nom;         // MUTEX + ptr???     // number of meals to eat
+	int					meals_to_eat;         // MUTEX + ptr???     // number of meals to eat
 	pthread_mutex_t		death;
 	pthread_mutex_t		print;
 	unsigned long		time;
@@ -87,11 +86,18 @@ int	input_check(char **tokens);
 int	ft_isdigit(int a);
 
 // init.c //////////////////////////////////////////////////////////////////////
-t_table	*init_table(char **argv, t_philo *philo, t_table *table, int meals);
-t_philo	*init_philo(int number_of_philos, t_philo *philo, t_table *table);
+t_table	*init_table(char **argv, t_philo **philo, t_table *table, int meals);
+t_philo	*init_philo(int number_of_philos, t_philo **philo, t_table *table);
 
 // routine.c ///////////////////////////////////////////////////////////////////
-void	*routine(t_philo *philo, t_table *table);
+void	routine(t_philo **philo, t_table *table);
+void	ft_eat(t_philo **philo, t_table *table);
+void	ft_sleep(t_philo **philo, t_table *table);
+void	ft_think(t_philo **philo, t_table *table);
+void	printft(t_table *table, t_philo **philo, char *msg);
+
+// monitoring.c ////////////////////////////////////////////////////////////////
+void	monitoring(t_philo **philo, t_table *table);
 
 
 #endif
