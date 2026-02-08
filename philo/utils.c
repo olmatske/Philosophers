@@ -6,11 +6,45 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 18:23:27 by olmatske          #+#    #+#             */
-/*   Updated: 2026/01/29 13:40:18 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/08 19:57:30 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	printft(t_table *table, t_philo *philo, char *msg)
+{
+	pthread_mutex_lock(&table->print);
+	printf("%lu %d %s\n", get_time() - table->time, philo->index, msg);
+	pthread_mutex_unlock(&table->print);
+}
+
+
+int	ft_exit(t_philo *philo, t_table *table)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < table->total_philos)
+	{
+		pthread_join(philo[i].thread, NULL);
+		i++;
+	}
+	i = 0;
+	while (i < table->total_philos)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&table->print);
+	pthread_mutex_destroy(&table->death);
+	free(table->forks);
+	free(philo);
+	free(table);
+	return (0);
+}
+
+
 
 unsigned long	ft_atol(const char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 15:10:09 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/08 19:38:53 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ typedef struct	s_philo {
 }	t_philo;
 
 typedef struct	s_table {
-	t_philo				**philos;     // array of philos
+	t_philo				*philos;     // array of philos
 	pthread_mutex_t		*forks;      // array of fork
 	unsigned long		ttd;         // time to die
 	unsigned long		tte;         // time to eat
 	unsigned long		tts;         // time to sleep
-	int					meals_to_eat;         // MUTEX + ptr???     // number of meals to eat
+	unsigned int		meals_to_eat;         // MUTEX + ptr???     // number of meals to eat
 	pthread_mutex_t		death;
 	pthread_mutex_t		print;
 	unsigned long		time;
-	int					total_philos;         // number of forks
+	unsigned int		total_philos;         // number of forks
 }	t_table;
 
 //# FUNCTIONS ##################################################################
@@ -78,26 +78,27 @@ void			*testfunc(void *arg);
 void			*functest(void *arg);
 
 // utils.c /////////////////////////////////////////////////////////////////////
+void			printft(t_table *table, t_philo *philo, char *msg);
+int				ft_exit(t_philo *philo, t_table *table);
 unsigned long	ft_atol(const char *str);
-int	ft_atoi(const char *str);
+int				ft_atoi(const char *str);
 
 // validate.c //////////////////////////////////////////////////////////////////
-int	input_check(char **tokens);
-int	ft_isdigit(int a);
+int				input_check(char **tokens);
+int				ft_isdigit(int a);
 
 // init.c //////////////////////////////////////////////////////////////////////
-t_table	*init_table(char **argv, t_philo **philo, t_table *table, int meals);
-t_philo	*init_philo(int number_of_philos, t_philo **philo, t_table *table);
+t_table			*init_table(char **argv);
+t_philo			*init_philo(int number_of_philos, t_table *table);
 
 // routine.c ///////////////////////////////////////////////////////////////////
-void	routine(t_philo **philo, t_table *table);
-void	ft_eat(t_philo **philo, t_table *table);
-void	ft_sleep(t_philo **philo, t_table *table);
-void	ft_think(t_philo **philo, t_table *table);
-void	printft(t_table *table, t_philo **philo, char *msg);
+void			*routine(void *arg);
+void			ft_eat(t_philo *philo);
+void			ft_sleep(t_philo *philo);
+void			ft_think(t_philo *philo);
 
 // monitoring.c ////////////////////////////////////////////////////////////////
-void	monitoring(t_philo **philo, t_table *table);
-
+void			monitoring(t_philo *philo, t_table *table);
+int				check_fullness(t_philo *philo, t_table *table);
 
 #endif

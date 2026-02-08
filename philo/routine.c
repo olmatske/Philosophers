@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:27:02 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 15:10:09 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/08 20:50:15 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,40 @@
 
 #include "philo.h"
 
-void	routine(t_philo **philo, t_table *table)
+void	*routine(void *arg)
 {
-	ft_eat(philo, table);
-	ft_sleep(philo, table);
-	ft_think(philo, table);
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	if (philo->index % 2)
+		usleep(1000);
+	while (1 && philo->is_alive == 1)
+	{
+		ft_eat(philo);
+		ft_sleep(philo);
+		ft_think(philo);
+	}
+	return (NULL);
 }
 
-void	ft_eat(t_philo **philo, t_table *table)
+void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->lfork);
 	pthread_mutex_lock(philo->rfork);
-	usleep(table->tte);
+	printft(philo->table, philo, EAT);
+	usleep(philo->table->tte * 1000);
 	pthread_mutex_unlock(philo->lfork);
 	pthread_mutex_unlock(philo->rfork);
 }
 
-void	ft_sleep(t_philo **philo, t_table *table)
+void	ft_sleep(t_philo *philo)
 {
 	(void)philo;
-	usleep(table->tts);
+	printft(philo->table, philo, SLEEP);
+	usleep(philo->table->tts * 1000);
 }
 
-void	ft_think(t_philo **philo, t_table *table)
+void	ft_think(t_philo *philo)
 {
-	printft(table, philo, THINK);
-}
-
-void	printft(t_table *table, t_philo **philo, char *msg)
-{
-	pthread_mutex_lock(&table->print);
-	printf("%lu %d %s", table->time, philo->index, msg);
-	pthread_mutex_unlock(&table->print);
+	printft(philo->table, philo, THINK);
 }

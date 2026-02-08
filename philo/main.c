@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 15:10:50 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/08 20:27:13 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 int	main(int argc, char **argv)
 {
+	t_table	*table;
+	t_philo	*philo;
+
 	if (argc != 5 && argc != 6)
 		return (printf("%s\n", INVALID), 1);
-	t_table			*table;
-	t_philo			*philo[ft_atoi(argv[1])];
-	int				meals;
-
 	if (input_check(argv) != 0)
-		return (INVALID, 1);
-	*philo = NULL;
-	table = init_table(argv, philo, NULL, meals);
-	*philo = init_philo(ft_atoi(argv[1]), NULL, table);
-	printf("good boy\n");
+		return (1);
+	table = init_table(argv);
+	philo = init_philo(ft_atoi(argv[1]), table);
+	table->philos = philo;
 	monitoring(philo, table);
-	return (free(philo), free(table), 0);
+	// printf("good boy\n");
+	return (ft_exit(philo, table), 0);
 }
 
 unsigned long	get_time(void)
