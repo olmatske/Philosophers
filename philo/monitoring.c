@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 20:35:04 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 21:14:41 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/09 16:40:48 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@ void	monitoring(t_philo *philo, t_table *table)
 	unsigned int				i;
 
 	i = 0;
-	// printf("\n\nWTF\n\n");
-	table->time = get_time();
 	while (i < table->total_philos)
 	{
 		pthread_create(&philo[i].thread, NULL, routine, &philo[i]);
 		i++;
 	}
-	(void)philo;
+	table->time = get_time();
 	while (1)
 	{
 		if (table->meals_to_eat != (unsigned int)-1
@@ -34,14 +32,32 @@ void	monitoring(t_philo *philo, t_table *table)
 		{
 			i = 0;
 			while(i < table->total_philos)
-				philo[i++].is_alive = 0;
+				philo[i++].is_alive = 1;
 			printft(table, philo, FULL);
 			break ;
 		}
-		if (philo->time_since_eaten > table->ttd)
-			philo->is_alive = -1;
-		
+		if (check_death(philo, table) == 1)
+		{
+			philo->is_alive = -1,
+			ft_exit(philo, table);
+			printft(table, philo, DEATH);
+			exit (0);
+		}
 	}
+}
+
+int	check_death(t_philo *philo, t_table *table)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < table->total_philos)
+	{
+		if (philo->time_since_eaten >= (table->time - table->ttd))
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 int	check_fullness(t_philo *philo, t_table *table)

@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:27:02 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 21:19:16 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/09 16:45:35 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->index % 2)
-		usleep(1000);
+		usleep(50);
 	while (philo->is_alive == 1)
 	{
 		ft_eat(philo);
@@ -39,12 +39,20 @@ void	*routine(void *arg)
 			ft_sleep(philo);
 		if (philo->is_alive == 1)
 			ft_think(philo);
+		if (philo->is_alive == -1)
+		{
+			printft(philo->table, philo, DEATH);
+			ft_exit(philo, philo->table);
+			exit (0);
+		}
+		// return (NULL);
 	}
-	if (philo->is_alive == -1)
-	{
-		printft(philo->table, philo, DEATH);
-		ft_exit(philo, philo->table);
-	}
+	// if (philo->is_alive == -1)
+	// {
+	// 	printft(philo->table, philo, DEATH);
+	// 	ft_exit(philo, philo->table);
+	// 	exit (0);
+	// }
 	return (NULL);
 }
 
@@ -52,11 +60,14 @@ void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->lfork);
 	pthread_mutex_lock(philo->rfork);
+	printft(philo->table, philo, FORK);
+	printft(philo->table, philo, FORK);
 	printft(philo->table, philo, EAT);
 	usleep(philo->table->tte * 1000);
 	philo->meal_count += 1;
 	pthread_mutex_unlock(philo->lfork);
 	pthread_mutex_unlock(philo->rfork);
+	philo->time_since_eaten = get_time();
 }
 
 void	ft_sleep(t_philo *philo)

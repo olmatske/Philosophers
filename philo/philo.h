@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 19:38:53 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/09 16:35:15 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define THINK		" is thinking"
 # define SLEEP		" is sleeping"
 # define DEATH		" died"
-# define FULL		"Everyone is full"
+# define FULL		" Everyone is full"
 
 //# STRUCTS ####################################################################
 
@@ -100,5 +100,6 @@ void			ft_think(t_philo *philo);
 // monitoring.c ////////////////////////////////////////////////////////////////
 void			monitoring(t_philo *philo, t_table *table);
 int				check_fullness(t_philo *philo, t_table *table);
+int				check_death(t_philo *philo, t_table *table);
 
 #endif
