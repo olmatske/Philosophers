@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 20:35:04 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/10 16:48:08 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/10 17:32:18 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	monitoring(t_philo *philo, t_table *table)
 	unsigned int				i;
 
 	i = 0;
-	// printf("\n\nWTF\n\n");
 	table->time = get_time();
 	while (i < table->total_philos)
 	{
@@ -43,6 +42,29 @@ void	monitoring(t_philo *philo, t_table *table)
 		
 	}
 }
+
+// void	stop_simulation(t_table *table, t_philo *philo)
+// {
+	
+// }
+
+
+
+int	check_death(t_philo *philo, t_table *table)
+{
+	unsigned long	time;
+
+	pthread_mutex_lock(&table->death);
+	time = get_time();
+	if ((time - philo->time_since_eaten) > table->ttd)
+	{
+		table->dead_philo = 1;
+		philo->is_alive = -1;
+	}
+	pthread_mutex_unlock(&table->death);
+	return (philo->is_alive);
+}
+
 
 int	check_fullness(t_philo *philo, t_table *table)
 {

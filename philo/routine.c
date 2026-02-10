@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:27:02 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/10 17:04:56 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/10 18:05:25 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->index % 2)
 		usleep(1000);
-	while (philo->is_alive == 1)
+	while (1)
 	{
+		if (check_death(philo, philo->table) == -1)
+			return (NULL);
 		ft_eat(philo);
 		if (philo->is_alive == 1)
 			ft_sleep(philo);
