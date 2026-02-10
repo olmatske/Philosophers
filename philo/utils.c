@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 18:23:27 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 21:22:32 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/10 16:51:17 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	printft(t_table *table, t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&table->print);
-	printf("%lu %d %s\n", get_time() - table->time, philo->index, msg);
+	printf("%lu %d%s\n", get_time() - table->time, philo->index, msg);
 	pthread_mutex_unlock(&table->print);
 }
 

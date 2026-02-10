@@ -6,11 +6,11 @@
 #    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/22 13:58:23 by olmatske          #+#    #+#              #
-#    Updated: 2026/02/08 13:41:52 by olmatske         ###   ########.fr        #
+#    Updated: 2026/02/10 16:44:37 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philosophers
+NAME = philo
 
 SOURCES = main.c validate.c utils.c init.c routine.c monitoring.c
 OBJECTS = $(SOURCES:.c=.o)

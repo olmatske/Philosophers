@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:27:02 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 21:19:16 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/10 17:04:56 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->lfork);
 	pthread_mutex_lock(philo->rfork);
+	printft(philo->table, philo, FORK);
+	printft(philo->table, philo, FORK);
 	printft(philo->table, philo, EAT);
 	usleep(philo->table->tte * 1000);
 	philo->meal_count += 1;
+	// printf("Philo %d has eaten %d meals\n", philo->index, philo->meal_count);
 	pthread_mutex_unlock(philo->lfork);
 	pthread_mutex_unlock(philo->rfork);
 }
