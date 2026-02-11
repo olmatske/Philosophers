@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 19:38:53 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/11 15:19:41 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ typedef struct	s_table {
 	unsigned long		tte;         // time to eat
 	unsigned long		tts;         // time to sleep
 	unsigned int		meals_to_eat;         // MUTEX + ptr???     // number of meals to eat
+	unsigned int		dead_philo;
 	pthread_mutex_t		death;
 	pthread_mutex_t		print;
 	unsigned long		time;
-	unsigned int		total_philos;         // number of forks
+	int					total_philos;         // number of forks
 }	t_table;
 
 //# FUNCTIONS ##################################################################
@@ -99,6 +100,7 @@ void			ft_think(t_philo *philo);
 
 // monitoring.c ////////////////////////////////////////////////////////////////
 void			monitoring(t_philo *philo, t_table *table);
+int	check_death(t_philo *philo, t_table *table, unsigned int index);
 int				check_fullness(t_philo *philo, t_table *table);
 
 #endif
