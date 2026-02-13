@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/11 15:04:54 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:37:09 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(int argc, char **argv)
 {
+	int		i;
 	t_table	*table;
 	t_philo	*philo;
 
@@ -24,10 +25,14 @@ int	main(int argc, char **argv)
 	table = init_table(argv);
 	philo = init_philo(ft_atoi(argv[1]), table);
 	table->philos = philo;
+	i = -1;
+	while (++i < table->total_philos)
+		pthread_create(&philo[i].thread, NULL, routine, &philo[i]);
 	monitoring(philo, table);
 	// printf("good boy\n");
+	ft_exit(philo, table);
 	printf("\n\n AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaa \n\n");
-	return (ft_exit(philo, table), 0);
+	return (0);
 }
 
 unsigned long	get_time(void)

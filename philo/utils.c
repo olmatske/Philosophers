@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 18:23:27 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/11 14:57:20 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:43:16 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,24 @@ int	ft_exit(t_philo *philo, t_table *table)
 	i = 0;
 	while (i < table->total_philos)
 	{
-		pthread_mutex_destroy(&table->forks[i]);
 		pthread_join(philo[i].thread, NULL);
+		i++;
+	}
+	i = 0;
+	while (i < table->total_philos)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
+		// free(&table->forks[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&table->print);
 	pthread_mutex_destroy(&table->death);
-	free(table->forks);
-	free(philo);
-	free(table);
+	if (table->forks)
+		free(table->forks);
+	if (philo)
+		free(philo);
+	if (table)
+		free(table);
 	return (0);
 }
 

@@ -6,31 +6,25 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 20:35:04 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/11 15:11:34 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:48:42 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// everyoone full, someone died
+// do I have to create a new thread?
 
 void	monitoring(t_philo *philo, t_table *table)
 {
 	int	i;
 
 	i = -1;
-	while (++i < table->total_philos)
-		pthread_create(&philo[i].thread, NULL, routine, &philo[i]);
-	// if (i == 1)
-	// {
-	// 	usleep(table->ttd * 1000);
-	// 	// printf("%lu 1 died\n", get_time() - table->time);
-	// 	table->dead_philo = 1;
-	// 	return ;
-	// }
+	// while (++i < table->total_philos)
+	// 	pthread_create(&philo[i].thread, NULL, routine, &philo[i]);
+	table->time = get_time();
 	while (table->dead_philo == 0)
 	{
-		if (table->meals_to_eat != (unsigned int)-1
+		if (table->meals_to_eat != -1
 			&& check_fullness(philo, table) == 1)
 		{
 			i = -1;
