@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/12 14:37:09 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:17:12 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ int	main(int argc, char **argv)
 	while (++i < table->total_philos)
 		pthread_create(&philo[i].thread, NULL, routine, &philo[i]);
 	monitoring(philo, table);
-	// printf("good boy\n");
 	ft_exit(philo, table);
-	printf("\n\n AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaa \n\n");
 	return (0);
 }
 

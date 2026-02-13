@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:27:02 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/12 14:55:14 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:58:30 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,37 +38,33 @@ void	*routine(void *arg)
 		printft(philo->table, philo, DEATH);
 		return (NULL);
 	}
-	// printf("\n\n AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaa \n\n");
 	if (philo->index % 2)
 		usleep(1000);
-	// while (philo->is_alive == 1 && philo->table->dead_philo == 0)
-	// {
-	// if (philo->is_alive == 1)
+	while (philo->is_alive == 1 && philo->table->dead_philo == 0)
+	{
 		ft_eat(philo);
-	// if (philo->is_alive == 1)
+		if (check_death(philo->table->philos, philo->table, philo->index - 1) > 0)
+			return (NULL);
 		ft_sleep(philo);
-	// if (philo->is_alive == 1)
+		if (check_death(philo->table->philos, philo->table, philo->index - 1) > 0)
+			return (NULL) ;
 		ft_think(philo);
-	// }
-	printft(philo->table, philo, DEATH);
-	// ft_exit(philo, philo->table);
+	}
 	return (NULL);
 }
 
 void	ft_eat(t_philo *philo)
 {
-	// if (philo->lfork && philo->rfork)
-	// {
-		pthread_mutex_lock(philo->lfork);
-		pthread_mutex_lock(philo->rfork);
-		printft(philo->table, philo, FORK);
-		printft(philo->table, philo, FORK);
-		printft(philo->table, philo, EAT);
-		usleep(philo->table->tte * 1000);
-		philo->meal_count += 1;
-		pthread_mutex_unlock(philo->lfork);
-		pthread_mutex_unlock(philo->rfork);
-	// }
+	pthread_mutex_lock(philo->lfork);
+	pthread_mutex_lock(philo->rfork);
+	printft(philo->table, philo, FORK);
+	printft(philo->table, philo, FORK);
+	printft(philo->table, philo, EAT);
+	philo->time_since_eaten = get_time();
+	usleep(philo->table->tte * 1000);
+	philo->meal_count += 1;
+	pthread_mutex_unlock(philo->lfork);
+	pthread_mutex_unlock(philo->rfork);
 }
 
 void	ft_sleep(t_philo *philo)
