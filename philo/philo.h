@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/12 14:49:45 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/15 14:22:27 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,9 @@ void			*testfunc(void *arg);
 void			*functest(void *arg);
 
 // utils.c /////////////////////////////////////////////////////////////////////
+int				ft_strncmp(char *first, char *second);
 void			printft(t_table *table, t_philo *philo, char *msg);
 int				ft_exit(t_philo *philo, t_table *table);
-unsigned long	ft_atol(const char *str);
-int				ft_atoi(const char *str);
 
 // validate.c //////////////////////////////////////////////////////////////////
 int				input_check(char **tokens);
@@ -100,7 +99,13 @@ void			ft_think(t_philo *philo);
 
 // monitoring.c ////////////////////////////////////////////////////////////////
 void			monitoring(t_philo *philo, t_table *table);
-int	check_death(t_philo *philo, t_table *table, unsigned int index);
+int				stop(t_table *table);
+int				check_death(t_philo *philo, t_table *table, unsigned int index);
 int				check_fullness(t_philo *philo, t_table *table);
+
+// monitornig_utils.c //////////////////////////////////////////////////////////
+void			smart_sleep(t_table *table, unsigned long ms);
+unsigned long	ft_atol(const char *str);
+int				ft_atoi(const char *str);
 
 #endif

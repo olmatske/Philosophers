@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 18:25:35 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/13 19:58:52 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/15 13:42:16 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_table	*init_table(char **argv)
 	table->tte = ft_atol(argv[3]);
 	table->tts = ft_atol(argv[4]);
 	table->dead_philo = 0;
-	// table->time = get_time();
 	if (!argv[5])
 		table->meals_to_eat = -1;
 	else

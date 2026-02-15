@@ -6,22 +6,9 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:27:02 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/13 19:58:30 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/15 14:31:16 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//eat, sleep, think, repeat
-//think if no fork available
-
-
-
-// take lfork, take rfork, eat, sleep
-// if fork is locked, philosopher is stuck, therefore he thinks
-// think if mutex locked
-
-// fullness by checking first instance of total philo fullness % meals to eat = 0
-
-// individual fucntions for checking mutexes: death, print, forks
 
 #include "philo.h"
 
@@ -33,7 +20,7 @@ void	*routine(void *arg)
 	if (philo->table->total_philos == 1)
 	{
 		printft(philo->table, philo, FORK);
-		usleep(philo->table->ttd * 1000);
+		smart_sleep(philo->table, philo->table->ttd);
 		philo->table->dead_philo++;
 		printft(philo->table, philo, DEATH);
 		return (NULL);
@@ -61,7 +48,7 @@ void	ft_eat(t_philo *philo)
 	printft(philo->table, philo, FORK);
 	printft(philo->table, philo, EAT);
 	philo->time_since_eaten = get_time();
-	usleep(philo->table->tte * 1000);
+	smart_sleep(philo->table, philo->table->tte);
 	philo->meal_count += 1;
 	pthread_mutex_unlock(philo->lfork);
 	pthread_mutex_unlock(philo->rfork);
@@ -71,7 +58,7 @@ void	ft_sleep(t_philo *philo)
 {
 	(void)philo;
 	printft(philo->table, philo, SLEEP);
-	usleep(philo->table->tts * 1000);
+	smart_sleep(philo->table, philo->table->tts);
 }
 
 void	ft_think(t_philo *philo)
