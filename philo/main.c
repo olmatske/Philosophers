@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/15 14:29:39 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/15 15:06:35 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,4 @@ unsigned long	get_time(void)
 	// time = tv.tv_sec;
 	return (time);
 }
+

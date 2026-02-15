@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:27:02 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/15 14:31:16 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/15 15:02:14 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*routine(void *arg)
 	}
 	if (philo->index % 2)
 		usleep(1000);
-	while (philo->is_alive == 1 && philo->table->dead_philo == 0)
+	while (!stop(philo->table))
 	{
 		ft_eat(philo);
 		if (check_death(philo->table->philos, philo->table, philo->index - 1) > 0)
@@ -47,7 +47,9 @@ void	ft_eat(t_philo *philo)
 	printft(philo->table, philo, FORK);
 	printft(philo->table, philo, FORK);
 	printft(philo->table, philo, EAT);
+	pthread_mutex_lock(&philo->table->death);
 	philo->time_since_eaten = get_time();
+	pthread_mutex_unlock(&philo->table->death);
 	smart_sleep(philo->table, philo->table->tte);
 	philo->meal_count += 1;
 	pthread_mutex_unlock(philo->lfork);

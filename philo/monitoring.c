@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 20:35:04 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/15 14:44:14 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/15 15:13:23 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,18 @@ void	monitoring(t_philo *philo, t_table *table)
 
 	i = -1;
 	
-	while (check_death(philo, table, philo->index) == 0)
+	while (!stop(table))
 	{
-		if (table->meals_to_eat != -1
-			&& check_fullness(philo, table) == 1)
+		while (++i < table->total_philos)
+			if (check_death(philo, table, i))
+				return ;
+		if (table->meals_to_eat != -1 && check_fullness(philo, table))
 		{
-			i = -1;
-			while(++i < table->total_philos)
-				philo[i].is_alive = check_death(philo, table, i);
-			printf("\nEveryone is full\n\n");
 			pthread_mutex_lock(&table->death);
 			table->dead_philo = 1;
 			pthread_mutex_unlock(&table->death);
-			break ;
-		}
-		if (table->dead_philo != 0)
-		{
-			ft_exit(philo, table);
+			printf("\nEveryone is full\n\n");
+			return ;
 		}
 		usleep(500);
 	}
