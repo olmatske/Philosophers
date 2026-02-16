@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 18:25:35 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/15 13:42:16 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:57:12 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_table	*init_table(char **argv)
 		pthread_mutex_init(&table->forks[i++], NULL);
 	pthread_mutex_init(&table->print, NULL);
 	pthread_mutex_init(&table->death, NULL);
+	pthread_mutex_init(&table->activity, NULL);
 	table->time = get_time();
 	table->ttd = ft_atol(argv[2]);
 	table->tte = ft_atol(argv[3]);

@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 14:16:11 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/15 16:04:23 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 13:48:41 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	printft(t_table *table, t_philo *philo, char *msg)
 	printf("%lu %d%s\n", get_time() - table->time, philo->index, msg);
 	pthread_mutex_unlock(&table->print);
 }
+
 
 int	ft_exit(t_philo *philo, t_table *table)
 {

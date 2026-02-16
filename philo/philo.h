@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/15 14:22:27 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:56:51 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 //# STATE CHANGES ##############################################################
 
 # define FORK		" has taken a fork"
+# define LFORK		" has taken the left fork"
+# define RFORK		" has taken the right fork"
 # define EAT		" is eating"
 # define THINK		" is thinking"
 # define SLEEP		" is sleeping"
@@ -56,10 +58,11 @@ typedef struct	s_philo {
 typedef struct	s_table {
 	t_philo				*philos;     // array of philos
 	pthread_mutex_t		*forks;      // array of fork
+	pthread_mutex_t		activity;
 	unsigned long		ttd;         // time to die
 	unsigned long		tte;         // time to eat
 	unsigned long		tts;         // time to sleep
-	int		meals_to_eat;         // MUTEX + ptr???     // number of meals to eat
+	int					meals_to_eat;         // MUTEX + ptr???     // number of meals to eat
 	unsigned int		dead_philo;
 	pthread_mutex_t		death;
 	pthread_mutex_t		print;
