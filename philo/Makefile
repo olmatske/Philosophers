@@ -6,17 +6,19 @@
 #    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/22 13:58:23 by olmatske          #+#    #+#              #
-#    Updated: 2026/02/09 16:23:05 by olmatske         ###   ########.fr        #
+#    Updated: 2026/02/16 20:49:05 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SOURCES = main.c validate.c utils.c init.c routine.c monitoring.c
+SOURCES = main.c validate.c utils.c init.c routine.c monitoring.c \
+			monitoring_utils.c
+
 OBJECTS = $(SOURCES:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -pthread
+CFLAGS = -Wall -Werror -Wextra -pthread -g
 RM = rm -rf
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 18:25:35 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/08 20:27:26 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:34:39 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	init_forks(pthread_mutex_t *forks, t_philo *philo, int id, int ph_len)
 {
+	if (ph_len == 1)
+	{
+		philo->lfork = &forks[id];
+		philo->rfork = NULL;
+	}
 	if (!(id % 2))
 	{
 		philo->lfork = &forks[id];
@@ -29,7 +34,7 @@ void	init_forks(pthread_mutex_t *forks, t_philo *philo, int id, int ph_len)
 t_table	*init_table(char **argv)
 {
 	t_table			*table;
-	unsigned int	i;
+	int				i;
 
 	i = 0;
 	table = malloc(sizeof(t_table));
@@ -42,10 +47,12 @@ t_table	*init_table(char **argv)
 		pthread_mutex_init(&table->forks[i++], NULL);
 	pthread_mutex_init(&table->print, NULL);
 	pthread_mutex_init(&table->death, NULL);
+	pthread_mutex_init(&table->activity, NULL);
 	table->time = get_time();
 	table->ttd = ft_atol(argv[2]);
 	table->tte = ft_atol(argv[3]);
 	table->tts = ft_atol(argv[4]);
+	table->dead_philo = 0;
 	if (!argv[5])
 		table->meals_to_eat = -1;
 	else
@@ -68,7 +75,7 @@ t_philo	*init_philo(int number_of_philos, t_table *table)
 		philo[id].index = id + 1;
 		philo[id].table = table;
 		philo[id].meal_count = 0;
-		philo[id].time_since_eaten = 0;
+		philo[id].time_since_eaten = table->time;
 		philo[id].tss = 0;
 		philo[id].is_alive = 1;
 		init_forks(table->forks, &philo[id], id, number_of_philos);

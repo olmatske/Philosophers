@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/09 16:35:15 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:49:20 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 //# LIBRARIES ##################################################################
 
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <limits.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <limits.h>
 
 //# ERROR MESSAGES #############################################################
 
-# define INVALID	"Du Hurensohn"
+# define INVALID	"Please input valid arguments, try: ./philo 5 800 200 200 3"
 # define INPUT		"Wrong input. Please try again."
 # define ERROR		"Problem with blah blah blah"
 # define GOOD		"Works"
@@ -33,6 +33,8 @@
 //# STATE CHANGES ##############################################################
 
 # define FORK		" has taken a fork"
+# define LFORK		" has taken the left fork"
+# define RFORK		" has taken the right fork"
 # define EAT		" is eating"
 # define THINK		" is thinking"
 # define SLEEP		" is sleeping"
@@ -41,29 +43,31 @@
 
 //# STRUCTS ####################################################################
 
-typedef struct	s_philo {
+typedef struct s_philo {
 	pthread_t			thread;
 	struct s_table		*table;
-	pthread_mutex_t		*lfork;      // left fork of current philo
-	pthread_mutex_t		*rfork;      // current fork of philo
-	unsigned int		index;       // philo index
-	unsigned int		meal_count;  // how many meals eaten
-	unsigned long		tss;         // time slept
-	unsigned long		time_since_eaten;         // time since last eaten check for death
-	int					is_alive;    // bool for killing
+	pthread_mutex_t		*lfork;
+	pthread_mutex_t		*rfork;
+	unsigned int		index;
+	int					meal_count;
+	unsigned long		tss;
+	unsigned long		time_since_eaten;
+	int					is_alive;
 }	t_philo;
 
-typedef struct	s_table {
-	t_philo				*philos;     // array of philos
-	pthread_mutex_t		*forks;      // array of fork
-	unsigned long		ttd;         // time to die
-	unsigned long		tte;         // time to eat
-	unsigned long		tts;         // time to sleep
-	unsigned int		meals_to_eat;         // MUTEX + ptr???     // number of meals to eat
+typedef struct s_table {
+	t_philo				*philos;
+	pthread_mutex_t		*forks;
+	pthread_mutex_t		activity;
+	unsigned long		ttd;
+	unsigned long		tte;
+	unsigned long		tts;
+	int					meals_to_eat;
+	unsigned int		dead_philo;
 	pthread_mutex_t		death;
 	pthread_mutex_t		print;
 	unsigned long		time;
-	unsigned int		total_philos;         // number of forks
+	int					total_philos;
 }	t_table;
 
 //# FUNCTIONS ##################################################################
@@ -78,10 +82,9 @@ void			*testfunc(void *arg);
 void			*functest(void *arg);
 
 // utils.c /////////////////////////////////////////////////////////////////////
+int				ft_strncmp(char *first, char *second);
 void			printft(t_table *table, t_philo *philo, char *msg);
 int				ft_exit(t_philo *philo, t_table *table);
-unsigned long	ft_atol(const char *str);
-int				ft_atoi(const char *str);
 
 // validate.c //////////////////////////////////////////////////////////////////
 int				input_check(char **tokens);
@@ -99,7 +102,13 @@ void			ft_think(t_philo *philo);
 
 // monitoring.c ////////////////////////////////////////////////////////////////
 void			monitoring(t_philo *philo, t_table *table);
+int				stop(t_table *table);
+int				check_death(t_philo *philo, t_table *table, unsigned int index);
 int				check_fullness(t_philo *philo, t_table *table);
-int				check_death(t_philo *philo, t_table *table);
+
+// monitornig_utils.c //////////////////////////////////////////////////////////
+void			smart_sleep(t_table *table, unsigned long ms);
+unsigned long	ft_atol(const char *str);
+int				ft_atoi(const char *str);
 
 #endif

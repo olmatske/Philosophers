@@ -6,52 +6,27 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 18:23:27 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/09 16:44:45 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:49:33 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	printft(t_table *table, t_philo *philo, char *msg)
+int	ft_strncmp(char *first, char *second)
 {
-	pthread_mutex_lock(&table->print);
-	printf("%lu %d%s\n", get_time() - table->time, philo->index, msg);
-	// printf("\n%d lfork:%d, rfork: %d\n", philo->index);
-	pthread_mutex_unlock(&table->print);
-}
-
-
-int	ft_exit(t_philo *philo, t_table *table)
-{
-	unsigned int	i;
+	int	i;
 
 	i = 0;
-	while (i < table->total_philos)
-	{
-		pthread_join(philo[i].thread, NULL);
+	while (first[i] && second[i] && first[i] == second[i])
 		i++;
-	}
-	i = 0;
-	while (i < table->total_philos)
-	{
-		pthread_mutex_destroy(&table->forks[i]);
-		i++;
-	}
-	pthread_mutex_destroy(&table->print);
-	pthread_mutex_destroy(&table->death);
-	free(table->forks);
-	free(philo);
-	free(table);
-	return (0);
+	return ((unsigned char)first[i] - (unsigned char)second[i]);
 }
-
-
 
 unsigned long	ft_atol(const char *str)
 {
 	unsigned long	res;
-	int		i;
-	int		check;
+	int				i;
+	int				check;
 
 	res = 0;
 	check = 1;
@@ -100,4 +75,3 @@ int	ft_atoi(const char *str)
 		res *= -1;
 	return (res);
 }
-

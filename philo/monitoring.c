@@ -6,80 +6,83 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 20:35:04 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/09 16:40:48 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:49:12 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// everyoone full, someone died
-
 void	monitoring(t_philo *philo, t_table *table)
 {
-	unsigned int				i;
+	int	i;
 
-	i = 0;
-	while (i < table->total_philos)
+	while (!stop(table))
 	{
-		pthread_create(&philo[i].thread, NULL, routine, &philo[i]);
-		i++;
-	}
-	table->time = get_time();
-	while (1)
-	{
-		if (table->meals_to_eat != (unsigned int)-1
-			&& check_fullness(philo, table) == 1)
+		i = -1;
+		while (++i < table->total_philos)
+			if (check_death(philo, table, i))
+				return ;
+		if (table->meals_to_eat != -1 && check_fullness(philo, table))
 		{
-			i = 0;
-			while(i < table->total_philos)
-				philo[i++].is_alive = 1;
-			printft(table, philo, FULL);
-			break ;
+			pthread_mutex_lock(&table->death);
+			table->dead_philo = 1;
+			pthread_mutex_unlock(&table->death);
+			return ;
 		}
-		if (check_death(philo, table) == 1)
-		{
-			philo->is_alive = -1,
-			ft_exit(philo, table);
-			printft(table, philo, DEATH);
-			exit (0);
-		}
+		usleep(500);
 	}
 }
 
-int	check_death(t_philo *philo, t_table *table)
+int	stop(t_table *table)
 {
-	unsigned int	i;
+	int	stop;
 
-	i = 0;
-	while (i < table->total_philos)
+	pthread_mutex_lock(&table->death);
+	stop = table->dead_philo > 0;
+	pthread_mutex_unlock(&table->death);
+	return (stop);
+}
+
+int	check_death(t_philo *philo, t_table *table, unsigned int index)
+{
+	unsigned long	curr_time;
+	int				death;
+
+	curr_time = get_time();
+	death = 0;
+	pthread_mutex_lock(&table->death);
+	if (table->dead_philo == 0
+		&& curr_time - philo[index].time_since_eaten >= table->ttd)
 	{
-		if (philo->time_since_eaten >= (table->time - table->ttd))
-			return (1);
-		i++;
+		table->dead_philo = 1;
+		death = 1;
+	}
+	pthread_mutex_unlock(&table->death);
+	if (death)
+	{
+		pthread_mutex_lock(&table->print);
+		printf("%lu %d%s\n", curr_time - table->time, philo[index].index, DEATH);
+		pthread_mutex_unlock(&table->print);
+		return (1);
 	}
 	return (0);
 }
 
 int	check_fullness(t_philo *philo, t_table *table)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
+	pthread_mutex_lock(&table->death);
 	while (i < table->total_philos)
 	{
 		if (philo[i].meal_count < table->meals_to_eat)
+		{
+			pthread_mutex_unlock(&table->death);
 			return (0);
+		}
 		i++;
 	}
+	pthread_mutex_unlock(&table->death);
 	return (1);
 }
-
-
-
-
-
-
-
-
-
-

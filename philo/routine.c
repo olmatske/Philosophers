@@ -6,22 +6,9 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:27:02 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/09 16:45:35 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:49:27 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//eat, sleep, think, repeat
-//think if no fork available
-
-
-
-// take lfork, take rfork, eat, sleep
-// if fork is locked, philosopher is stuck, therefore he thinks
-// think if mutex locked
-
-// fullness by checking first instance of total philo fullness % meals to eat = 0
-
-// individual fucntions for checking mutexes: death, print, forks
 
 #include "philo.h"
 
@@ -30,54 +17,60 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->table->total_philos == 1)
+	{
+		printft(philo->table, philo, FORK);
+		smart_sleep(philo->table, philo->table->ttd);
+		pthread_mutex_lock(&philo->table->death);
+		philo->table->dead_philo++;
+		pthread_mutex_unlock(&philo->table->death);
+		printft(philo->table, philo, DEATH);
+		return (NULL);
+	}
 	if (philo->index % 2)
-		usleep(50);
-	while (philo->is_alive == 1)
+		usleep(1000);
+	while (!stop(philo->table))
 	{
 		ft_eat(philo);
-		if (philo->is_alive == 1)
-			ft_sleep(philo);
-		if (philo->is_alive == 1)
-			ft_think(philo);
-		if (philo->is_alive == -1)
-		{
-			printft(philo->table, philo, DEATH);
-			ft_exit(philo, philo->table);
-			exit (0);
-		}
-		// return (NULL);
+		ft_sleep(philo);
+		ft_think(philo);
 	}
-	// if (philo->is_alive == -1)
-	// {
-	// 	printft(philo->table, philo, DEATH);
-	// 	ft_exit(philo, philo->table);
-	// 	exit (0);
-	// }
 	return (NULL);
 }
 
 void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->lfork);
+	printft(philo->table, philo, FORK);
 	pthread_mutex_lock(philo->rfork);
 	printft(philo->table, philo, FORK);
-	printft(philo->table, philo, FORK);
 	printft(philo->table, philo, EAT);
-	usleep(philo->table->tte * 1000);
-	philo->meal_count += 1;
-	pthread_mutex_unlock(philo->lfork);
-	pthread_mutex_unlock(philo->rfork);
+	smart_sleep(philo->table, philo->table->tte);
+	pthread_mutex_lock(&philo->table->activity);
 	philo->time_since_eaten = get_time();
+	philo->meal_count += 1;
+	pthread_mutex_unlock(&philo->table->activity);
+	pthread_mutex_unlock(philo->rfork);
+	pthread_mutex_unlock(philo->lfork);
 }
 
 void	ft_sleep(t_philo *philo)
 {
 	(void)philo;
 	printft(philo->table, philo, SLEEP);
-	usleep(philo->table->tts * 1000);
+	smart_sleep(philo->table, philo->table->tts);
 }
 
 void	ft_think(t_philo *philo)
 {
+	long	think_time;
+
 	printft(philo->table, philo, THINK);
+	if (philo->table->total_philos % 2 == 1)
+	{
+		think_time = (long)philo->table->tte * 2 - (long)philo->table->tts;
+		if (think_time < 0)
+			think_time = 0;
+		smart_sleep(philo->table, (unsigned long)think_time / 2);
+	}
 }
