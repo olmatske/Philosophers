@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:21:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/16 13:49:38 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:35:42 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ int	main(int argc, char **argv)
 
 unsigned long	get_time(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 	unsigned long	time;
 
 	gettimeofday(&tv, NULL);
 	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-	// time = tv.tv_sec;
 	return (time);
 }
-

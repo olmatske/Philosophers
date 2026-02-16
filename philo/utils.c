@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 18:23:27 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/15 14:21:17 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:41:36 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	ft_strncmp(char *first, char *second)
 unsigned long	ft_atol(const char *str)
 {
 	unsigned long	res;
-	int		i;
-	int		check;
+	int				i;
+	int				check;
 
 	res = 0;
 	check = 1;
@@ -75,4 +75,3 @@ int	ft_atoi(const char *str)
 		res *= -1;
 	return (res);
 }
-

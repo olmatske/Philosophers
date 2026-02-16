@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 18:25:35 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/16 16:57:12 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:34:39 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_forks(pthread_mutex_t *forks, t_philo *philo, int id, int ph_len)
 t_table	*init_table(char **argv)
 {
 	t_table			*table;
-	int	i;
+	int				i;
 
 	i = 0;
 	table = malloc(sizeof(t_table));

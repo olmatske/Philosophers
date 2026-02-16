@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:27:02 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/16 16:57:30 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:42:03 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ void	*routine(void *arg)
 	while (!stop(philo->table))
 	{
 		ft_eat(philo);
-		// if (check_death(philo->table->philos, philo->table, philo->index - 1) > 0)
-		// 	return (NULL);
 		ft_sleep(philo);
-		// if (check_death(philo->table->philos, philo->table, philo->index - 1) > 0)
-		// 	return (NULL) ;
 		ft_think(philo);
 	}
 	return (NULL);
@@ -48,18 +44,12 @@ void	ft_eat(t_philo *philo)
 	printft(philo->table, philo, FORK);
 	pthread_mutex_lock(philo->rfork);
 	printft(philo->table, philo, FORK);
-
 	printft(philo->table, philo, EAT);
 	smart_sleep(philo->table, philo->table->tte);
-	
 	pthread_mutex_lock(&philo->table->activity);
 	philo->time_since_eaten = get_time();
 	philo->meal_count += 1;
 	pthread_mutex_unlock(&philo->table->activity);
-	
-	// pthread_mutex_lock(&philo->table->death);
-	// pthread_mutex_unlock(&philo->table->death);
-
 	pthread_mutex_unlock(philo->rfork);
 	pthread_mutex_unlock(philo->lfork);
 }

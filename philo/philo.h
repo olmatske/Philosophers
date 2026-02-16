@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 13:41:49 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/16 16:56:51 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:37:44 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 //# LIBRARIES ##################################################################
 
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <limits.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <limits.h>
 
 //# ERROR MESSAGES #############################################################
 
-# define INVALID	"Du Hurensohn"
+# define INVALID	"Please input valid arguments, try: ./philo 5 800 200 200 3"
 # define INPUT		"Wrong input. Please try again."
 # define ERROR		"Problem with blah blah blah"
 # define GOOD		"Works"
@@ -43,31 +43,31 @@
 
 //# STRUCTS ####################################################################
 
-typedef struct	s_philo {
+typedef struct s_philo {
 	pthread_t			thread;
 	struct s_table		*table;
-	pthread_mutex_t		*lfork;      // left fork of current philo
-	pthread_mutex_t		*rfork;      // current fork of philo
-	unsigned int		index;       // philo index
-	int		meal_count;  // how many meals eaten
-	unsigned long		tss;         // time slept
-	unsigned long		time_since_eaten;         // time since last eaten check for death
-	int					is_alive;    // bool for killing
+	pthread_mutex_t		*lfork;
+	pthread_mutex_t		*rfork;
+	unsigned int		index;
+	int					meal_count;
+	unsigned long		tss;
+	unsigned long		time_since_eaten;
+	int					is_alive;
 }	t_philo;
 
-typedef struct	s_table {
-	t_philo				*philos;     // array of philos
-	pthread_mutex_t		*forks;      // array of fork
+typedef struct s_table {
+	t_philo				*philos;
+	pthread_mutex_t		*forks;
 	pthread_mutex_t		activity;
-	unsigned long		ttd;         // time to die
-	unsigned long		tte;         // time to eat
-	unsigned long		tts;         // time to sleep
-	int					meals_to_eat;         // MUTEX + ptr???     // number of meals to eat
+	unsigned long		ttd;
+	unsigned long		tte;
+	unsigned long		tts;
+	int					meals_to_eat;
 	unsigned int		dead_philo;
 	pthread_mutex_t		death;
 	pthread_mutex_t		print;
 	unsigned long		time;
-	int					total_philos;         // number of forks
+	int					total_philos;
 }	t_table;
 
 //# FUNCTIONS ##################################################################
