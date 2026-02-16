@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:27:02 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/15 15:02:14 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/15 16:01:43 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	*routine(void *arg)
 	while (!stop(philo->table))
 	{
 		ft_eat(philo);
-		if (check_death(philo->table->philos, philo->table, philo->index - 1) > 0)
-			return (NULL);
+		// if (check_death(philo->table->philos, philo->table, philo->index - 1) > 0)
+		// 	return (NULL);
 		ft_sleep(philo);
-		if (check_death(philo->table->philos, philo->table, philo->index - 1) > 0)
-			return (NULL) ;
+		// if (check_death(philo->table->philos, philo->table, philo->index - 1) > 0)
+		// 	return (NULL) ;
 		ft_think(philo);
 	}
 	return (NULL);

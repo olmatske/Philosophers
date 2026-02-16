@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 20:35:04 by olmatske          #+#    #+#             */
-/*   Updated: 2026/02/15 15:13:23 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/02/15 16:00:53 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 void	monitoring(t_philo *philo, t_table *table)
 {
 	int	i;
-
-	i = -1;
 	
 	while (!stop(table))
 	{
+		i = -1;
 		while (++i < table->total_philos)
 			if (check_death(philo, table, i))
 				return ;
